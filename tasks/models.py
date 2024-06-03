@@ -9,6 +9,11 @@ class Project(models.Model):
         auto_now=False, verbose_name='Дата создания', auto_now_add=True, editable=False)
     last_modified = models.DateField(
         auto_now=True, verbose_name='Дата обновления', editable=False)
+    
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
 
 
 class Task(models.Model):
@@ -33,3 +38,7 @@ class Task(models.Model):
         auto_now=False, verbose_name='Дата создания', auto_now_add=True, editable=False)
     last_modified = models.DateField(
         auto_now=True, verbose_name='Дата обновления', editable=False)
+    
+    class Meta:
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
