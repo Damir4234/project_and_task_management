@@ -12,6 +12,7 @@ class Project(models.Model):
     last_modified = models.DateField(
         auto_now=True, verbose_name='Дата обновления', editable=False)
     
+    
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'

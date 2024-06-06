@@ -3,14 +3,21 @@ from rest_framework import generics, status
 from users.models import CustomUser 
 from users.serializers import UserSerializer
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+
 
 class UserCreate(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
+    permission_classes = [AllowAny]
+
     def create(self, request, *args, **kwargs):
         """Переопределение метода для сохранения хешированного пароля в бд (если пароль не хешируется -
         пользователь не считается активным и токен авторизации не создается)"""
+        
+        
+
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
