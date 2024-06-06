@@ -8,7 +8,8 @@ class ProjectSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ['name', 'description', 'date_of_creation', 'last_modified', 'owner']
+        read_only_fields = ['date_of_creation', 'last_modified', 'owner']
 
 
 class TaskSerializer(serializers.ModelSerializer):

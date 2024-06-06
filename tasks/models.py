@@ -11,7 +11,7 @@ class Project(models.Model):
         auto_now=False, verbose_name='Дата создания', auto_now_add=True, editable=False)
     last_modified = models.DateField(
         auto_now=True, verbose_name='Дата обновления', editable=False)
-    
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Исполнитель')
     
     class Meta:
         verbose_name = 'Проект'
