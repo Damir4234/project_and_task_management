@@ -9,7 +9,7 @@ from users.permissions import IsOwner
 class ProjectCreateAPIView(generics.CreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticated]
+    
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
