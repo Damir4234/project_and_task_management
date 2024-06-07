@@ -3,7 +3,7 @@ from rest_framework import generics
 from tasks.models import Task, Project
 from tasks.serializers import TaskSerializer, ProjectSerializer
 from rest_framework.permissions import IsAuthenticated
-from users.permissions import IsOwner 
+from users.permissions import IsOwner, IsProjectOwner
 
 
 class ProjectCreateAPIView(generics.CreateAPIView):
@@ -46,6 +46,7 @@ class ProjectDeleteAPIView(generics.DestroyAPIView):
 class TaskCreateAPIView(generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [IsOwner, IsProjectOwner]
 
     
 
