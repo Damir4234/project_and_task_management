@@ -1,14 +1,19 @@
 from django.urls import path
-from tasks.views import TaskList, ProjectList, ProjectCreate, ProjectDetail, TaskCreate, TaskDetail
+from tasks.views import TaskListAPIView, ProjectListAPIView, ProjectCreateAPIView, TaskCreateAPIView, ProjectRetrieveAPIView, ProjectUpdateAPIView, ProjectDeleteAPIView, TaskRetrieveAPIView, TaskUpdateAPIView, TaskDeleteAPIView
 
 urlpatterns = [
 
-    path('project/', ProjectList.as_view(), name='project'),
-    path('project/create/', ProjectCreate.as_view(), name='craete_project'),
-    path('project/<int:pk>/', ProjectDetail.as_view(), name='detail_project'),
+    path('project/', ProjectListAPIView.as_view(), name='projects'),
+    path('project/create/', ProjectCreateAPIView.as_view(), name='create_project'),
+    path('project/<int:pk>/', ProjectRetrieveAPIView.as_view(), name='detail_project'),
+    path('project/<int:pk>/update/', ProjectUpdateAPIView.as_view(), name='update_project'),
+    path('project/<int:pk>/delete/', ProjectDeleteAPIView.as_view(), name='delete_project'),
+
+    path('tasks/', TaskListAPIView.as_view(), name='tasks'),
+    path('tasks/create/', TaskCreateAPIView.as_view(), name='create_task'),
+    path('tasks/<int:pk>/', TaskRetrieveAPIView.as_view(), name='detail_task'),
+    path('tasks/<int:pk>/update/', TaskUpdateAPIView.as_view(), name='update_task'),
+    path('tasks/<int:pk>/delete/', TaskDeleteAPIView.as_view(), name='delete_task'),
     
-    path('tasks/', TaskList.as_view(), name='task'),
-    path('tasks/create/', TaskCreate.as_view(), name='craete_task'),
-    path('tasks/<int:pk>/', TaskDetail.as_view(), name='detail_task'),
     
 ]

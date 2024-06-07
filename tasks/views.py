@@ -5,13 +5,8 @@ from tasks.serializers import TaskSerializer, ProjectSerializer
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsOwner 
 
-class ProjectList(generics.ListAPIView):
 
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticated]
-
-class ProjectCreate(generics.CreateAPIView):
+class ProjectCreateAPIView(generics.CreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated]
@@ -19,33 +14,69 @@ class ProjectCreate(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    
-    
 
-class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProjectListAPIView(generics.ListAPIView):
+
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    
 
-    permission_classes = [IsAuthenticated, IsOwner]
+class ProjectRetrieveAPIView(generics.RetrieveAPIView):
+
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    
 
 
+class ProjectUpdateAPIView(generics.UpdateAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [IsOwner]
 
-class TaskList(generics.ListAPIView):
+
+class ProjectDeleteAPIView(generics.DestroyAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [IsOwner]
+
+    
+    
+
+
+class TaskCreateAPIView(generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    permission_classes = [IsAuthenticated]
+    
 
-class TaskCreate(generics.CreateAPIView):
+
+class TaskListAPIView(generics.ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    permission_classes = [IsAuthenticated]
+    
 
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+
+class TaskRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    
 
-    permission_classes = [IsAuthenticated]
+
+class TaskUpdateAPIView(generics.UpdateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    
+
+
+class TaskDeleteAPIView(generics.DestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    
+
+
+
+
+
     
 
