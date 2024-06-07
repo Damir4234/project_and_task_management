@@ -2,8 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from tasks.models import Task, Project
 from tasks.serializers import TaskSerializer, ProjectSerializer
-from rest_framework.permissions import IsAuthenticated
-from users.permissions import IsOwner, IsProjectOwner
+from users.permissions import IsOwner, IsProjectOwner, IsAssignee, IsProjectOwnerDelete
 
 
 class ProjectCreateAPIView(generics.CreateAPIView):
@@ -46,7 +45,7 @@ class ProjectDeleteAPIView(generics.DestroyAPIView):
 class TaskCreateAPIView(generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [IsOwner, IsProjectOwner]
+    permission_classes = [IsProjectOwner]
 
     
 
@@ -55,7 +54,6 @@ class TaskListAPIView(generics.ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    
 
 
 class TaskRetrieveAPIView(generics.RetrieveAPIView):
@@ -67,12 +65,13 @@ class TaskRetrieveAPIView(generics.RetrieveAPIView):
 class TaskUpdateAPIView(generics.UpdateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    
+    permission_classes = [IsAssignee]
 
 
 class TaskDeleteAPIView(generics.DestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [IsProjectOwnerDelete]
     
 
 
